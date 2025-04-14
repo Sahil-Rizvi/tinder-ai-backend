@@ -45,8 +45,7 @@ public class TinderAiBackendApplication implements CommandLineRunner {
         );
         profileRepository.save(profile);
 
-
-        profile = new Profile(
+        Profile profile2 = new Profile(
                 "2",
                 "Foo",
                 "Bar",
@@ -57,9 +56,9 @@ public class TinderAiBackendApplication implements CommandLineRunner {
                 "foo.jpg",
                 "INTP"
         );
+        profileRepository.save(profile2);
 
         profileRepository.findAll().forEach(System.out::println);
-
 
         Conversation conversation = new Conversation(
                 "1",
