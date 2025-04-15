@@ -6,6 +6,8 @@ import io.javabrains.tinder_ai_backend.conversations.ConversationRepository;
 import io.javabrains.tinder_ai_backend.profiles.Gender;
 import io.javabrains.tinder_ai_backend.profiles.Profile;
 import io.javabrains.tinder_ai_backend.profiles.ProfileRepository;
+import org.springframework.ai.chat.client.ChatClient;
+import org.springframework.ai.ollama.OllamaChatModel;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -23,11 +25,23 @@ public class TinderAiBackendApplication implements CommandLineRunner {
     @Autowired
     private ConversationRepository conversationRepository;
 
+    private ChatClient chatClient;
+
+    public TinderAiBackendApplication(OllamaChatModel ollamaChatModel) {
+        this.chatClient = ChatClient.create(ollamaChatModel);
+    }
+
     public static void main(String[] args) {
         SpringApplication.run(TinderAiBackendApplication.class, args);
     }
 
     public void run(String... args) {
+
+        String response = chatClient
+                .prompt("Who is Koushik Kothagal?")
+                .call()
+                .content();
+        System.out.println(response);
 
         profileRepository.deleteAll();
         conversationRepository.deleteAll();

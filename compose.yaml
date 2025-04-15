@@ -7,7 +7,8 @@ services:
       - 'MONGO_INITDB_ROOT_USERNAME=root'
     ports:
       - '27017'
-  ollama:
-    image: 'ollama/ollama:latest'
-    ports:
-      - '11434'
+# running it without docker
+#  ollama:
+#    image: 'ollama/ollama:latest'
+#    ports:
+#      - '11434'
